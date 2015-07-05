@@ -15,12 +15,12 @@
  */
  function NullorEmpty(str) {
 	// body...
-	Boolean result = false;
+	var result = false;
 	if(str.length !=0){
 		for(var i = 0;i<str.length;i++){
 			if(str[i] !=""){
 				result = true;
-			}			else{
+			}else{
 				result = false;
 			}
 		}
