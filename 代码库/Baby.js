@@ -53,7 +53,7 @@
  */
  function checkmailcode(email){
 	var right = /^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/;
-	if (email.test(right)) {
+	if (email.match(right)) {
 		return true;
  	}
 	else {
@@ -72,7 +72,7 @@
  */
  function checkidcardcode(idcard){
 	var right = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-	if (idcard.test(right)) {
+	if (idcard.match(right)) {
 		return true;
  	}
 	else {
@@ -91,7 +91,7 @@
  */
  function  checktelcode(telephone) {
 	var right = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-	if (telephone.test(right)) {
+	if (telephone.match(right)) {
 		return true;
  	}
 	else {
