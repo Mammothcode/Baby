@@ -139,5 +139,3 @@ function GetRequest () {
     }
     return theRequest;
 }
-
-
