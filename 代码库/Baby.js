@@ -1,31 +1,32 @@
 //***********//
 //**mine.js**//
 //**Version**//
-//**  1.03 **//
-//**15-7-06**//
+//**  1.01 **//
+//**15-3-16**//
 //**Author **//
 //** Baby  **//
 //***********//
 
 /**验证函数 **/
+
 /**
  * [isNullorEmpty 判断字符串数组是否为空]
  * @param  {string[]} str
  * @return {Boolean}
  */
- function NullorEmpty(str) {
-	// body...
-	var result = false;
-	if(str.length !=0){
-		for(var i = 0;i<str.length;i++){
-			if(str[i] !=""){
-				result = true;
-			}else{
-				result = false;
-			}
-		}
-	}
-	return result;
+function isNullorEmpty(str) {
+    // body...
+    var result = false;
+    if(str.length !== 0){
+        for(var i = 0;i<str.length;i++){
+            if(str[i] !== ""){
+                result = true;
+            }			else{
+                result = false;
+            }
+        }
+    }
+    return result;
 }
 
 /**
@@ -33,8 +34,8 @@
  * @param  {varchar} phonenum
  * @return {Boolean}
  */
- function checkphonecode(phonenum){
-	//待检测表达式是否正确
+function checkphonecode(phonenum){
+    //待检测表达式是否正确
     var right = /^((\(\d{3}\))|(\d{3}\-))?13\d{9}|14[57]\d{8}|15\d{9}|18\d{9}|17\d{9}$/;
     if (phonenum.length != 11 || !phonenum.match(right)) {
         new dialog({
@@ -51,18 +52,18 @@
  * @param  {varchar}email
  * @return {Boolean}
  */
- function checkmailcode(email){
-	var right = /^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/;
-	if (email.match(right)) {
-		return true;
- 	}
-	else {
-		new dialog({
+function checkmailcode(email){
+    var right = /^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/;
+    if (email.test(right)) {
+        return true;
+    }
+    else {
+        new dialog({
             type: "tip",
             tip_content: "请输入正确邮箱！"
         });
-		return false;
-	}
+        return false;
+    }
 }
 
 /**
@@ -70,18 +71,18 @@
  * @param  {varchar} idcard
  * @return {Boolean}
  */
- function checkidcardcode(idcard){
-	var right = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-	if (idcard.match(right)) {
-		return true;
- 	}
-	else {
-		new dialog({
+function checkidcardcode(idcard){
+    var right = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    if (idcard.test(right)) {
+        return true;
+    }
+    else {
+        new dialog({
             type: "tip",
             tip_content: "请输入正确身份证号！"
         });
-		return false;
-	}
+        return false;
+    }
 }
 
 /**
@@ -89,18 +90,18 @@
  * @param  {varchar} telephone
  * @return {Boolean}
  */
- function  checktelcode(telephone) {
-	var right = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-	if (telephone.match(right)) {
-		return true;
- 	}
-	else {
-		new dialog({
+function  checktelcode(telephone) {
+    var right = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    if (telephone.test(right)) {
+        return true;
+    }
+    else {
+        new dialog({
             type: "tip",
             tip_content: "请输入正确固定电话号！"
         });
-		return false;
-	}
+        return false;
+    }
 }
 
 /**
@@ -108,24 +109,25 @@
  * @param  {varchar} str1 str2 massage提示信息
  * @return {Boolean}
  */
- function Comparison(str1,str2,massage){
-	if(str1 ==  str2){
-		return true;
-	}
-	else{
-		new dialog({
+function Comparison (str1,str2,massage){
+    if(str1 ==  str2){
+        return true;
+    }
+    else{
+        new dialog({
             type: "tip",
             tip_content: massage
         });
         return false;
-	}
+    }
 }
 
 /**验证url**/
+
 /**
- * [GetRequest 获取url中"?"符后的字串]
- */
- function GetRequest() {
+	* [GetRequest 获取url中"?"符后的字串]
+	*/
+function GetRequest () {
     var url = location.search; //获取url中"?"符后的字串
     var theRequest = new Object();
     if (url.indexOf("?") != -1) {
@@ -137,3 +139,5 @@
     }
     return theRequest;
 }
+
+
