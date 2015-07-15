@@ -1,11 +1,48 @@
 //***********//
-//**mine.js**//
+//**baby.js**//
 //**Version**//
-//**  1.04 **//
-//**15-7-07**//
+//**  1.05 **//
+//**15-7-15**//
 //**Author **//
 //** Baby  **//
 //***********//
+
+var base;
+/**
+ * [base first namespace]
+ * @type {Object}
+ */
+if (!base) base = {};
+
+/**
+ * [check second namespace]
+ * @type {Object}
+ */
+base.check = {};
+
+/**
+ * [checkstr third namespace]
+ * @type {Object}
+ */
+base.check.checkstr = {};
+
+/**
+ * [checkcode third namespace]
+ * @type {Object}
+ */
+base.check.checkcode = {};
+
+/**
+ * [get second namespace]
+ * @type {Object}
+ */
+base.get = {};
+
+/**
+ * [getstr third namespace]
+ * @type {Object}
+ */
+base.get.getstr = {};
 
 /**验证函数 **/
 
@@ -14,7 +51,7 @@
  * @param  {string[]} str
  * @return {Boolean}
  */
-function isNullorEmpty(str) {
+base.check.checkstr.isNullorEmpty = function (str) {
     // body...
     var result = false;
     if(str.length !== 0){
@@ -34,14 +71,10 @@ function isNullorEmpty(str) {
  * @param  {varchar} phonenum
  * @return {Boolean}
  */
-function checkphonecode(phonenum){
+base.check.checkcode.checkphonecode = function (phonenum){
     //待检测表达式是否正确
     var right = /^((\(\d{3}\))|(\d{3}\-))?13\d{9}|14[57]\d{8}|15\d{9}|18\d{9}|17\d{9}$/;
     if (phonenum.length != 11 || !phonenum.match(right)) {
-        new dialog({
-            type: "tip",
-            tip_content: "请输入正确手机号！"
-        });
         return false;
     } 
     return true;
@@ -52,16 +85,12 @@ function checkphonecode(phonenum){
  * @param  {varchar}email
  * @return {Boolean}
  */
-function checkmailcode(email){
+base.check.checkcode.checkmailcode = function (email){
     var right = /^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/;
     if (email.test(right)) {
         return true;
     }
     else {
-        new dialog({
-            type: "tip",
-            tip_content: "请输入正确邮箱！"
-        });
         return false;
     }
 }
@@ -71,53 +100,42 @@ function checkmailcode(email){
  * @param  {varchar} idcard
  * @return {Boolean}
  */
-function checkidcardcode(idcard){
+base.check.checkcode.checkidcardcode = function (idcard){
     var right = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
     if (idcard.test(right)) {
         return true;
     }
     else {
-        new dialog({
-            type: "tip",
-            tip_content: "请输入正确身份证号！"
-        });
         return false;
     }
 }
+
 
 /**
  * [checktelcode 正则表达式验证固定电话是否正确]
  * @param  {varchar} telephone
  * @return {Boolean}
  */
-function  checktelcode(telephone) {
+base.check.checkcode.checktelcode = function  (telephone) {
     var right = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
     if (telephone.test(right)) {
         return true;
     }
     else {
-        new dialog({
-            type: "tip",
-            tip_content: "请输入正确固定电话号！"
-        });
         return false;
     }
 }
 
 /**
  * [checktelcode 验证两个字符串是否相等]
- * @param  {varchar} str1 str2 massage提示信息
+ * @param  {varchar} str1 str2
  * @return {Boolean}
  */
-function Comparison (str1,str2,massage){
+base.check.checkstr.Comparison = function (str1,str2){
     if(str1 ==  str2){
         return true;
     }
     else{
-        new dialog({
-            type: "tip",
-            tip_content: massage
-        });
         return false;
     }
 }
@@ -125,12 +143,13 @@ function Comparison (str1,str2,massage){
 /**验证url**/
 
 /**
-	* [GetRequest 获取url中"?"符后的字串]
-	*/
-function GetRequest () {
+* [GetRequest 获取url中"?"符后的字串]
+*/
+
+base.get.getstr.GetRequest = function  () {
     var url = location.search; //获取url中"?"符后的字串
     var theRequest = new Object();
-    if (url.indexOf("?") != -1) {
+    if (url.indexOf("?") !== -1) {
         var str = url.substr(1);
         strs = str.split("&");
         for (var i = 0; i < strs.length; i++) {
