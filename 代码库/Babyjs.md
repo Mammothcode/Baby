@@ -1,6 +1,7 @@
-mine.js
-=
+#mine.js
 ***
+##命名空间
+
 > ###1.验证型js
 
 ***
@@ -21,13 +22,13 @@ return Boolean;
 `判断`
 
 * [checkidcardcode 验证两个字符串是否相等]
-* @param {varchar} str1,str2,massage提示信息
+* @param {varchar} str1,str2
 * @return {Boolean}
-
 ```
-function Comparison(str1,str2,massage)
+function Comparison(str1,str2)
 return Boolean;
 ```
+
 ***
 > ###2. 正则表达式js
 
@@ -39,7 +40,6 @@ return Boolean;
 * [checkphonecode 正则表达式验证手机号是否正确]
 * @param {varchar} phonenum
 * @return {Boolean}
-
 ```
 function checkphonecode (phonenum) 
 return Boolean;
@@ -51,7 +51,6 @@ return Boolean;
 * [checktelcode 正则表达式验证固定电话是否正确]
 * @param {varchar} telephone
 * @return {Boolean}
-
 ```
 function checktelcode(telephone)
 return Boolean;
@@ -63,7 +62,6 @@ return Boolean;
 * [checkmailcode 正则表达式验证邮箱是否正确]
 * @param {varchar} phonenum
 * @return {Boolean}
-
 ```
 function checkmailcode(email)
 return Boolean;
@@ -75,7 +73,6 @@ return Boolean;
 * [checkidcardcode 正则表达式验证身份证是否正确]
 * @param {varchar} idcard
 * @return {Boolean}
-
 ```
 function checkidcardcode(idcard)
 return Boolean;
@@ -88,10 +85,8 @@ return Boolean;
 ####1.获得url参数
 `获取参数 `
 * [GetRequest 获取url中"?"符后的字串]
-
 ```
-function GetRequest() {
-     //获取url中"?"符后的字串
+function Geturlparam() {
     var url = location.search;
     var theRequest = new Object();
     if (url.indexOf("/") != -1) {
@@ -106,13 +101,10 @@ function GetRequest() {
 ```
 
 * 调用该方法
-
->[GetRequest 获取url中"?"符后的字串]
-
  `调用 `
-
+ * [GetRequest get url param after ?]
 ```
 var Request = new Object();
-Request = GetRequest();
+Request = Geturlparam();
 type = Request['(type)'];
 ```
