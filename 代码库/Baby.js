@@ -3,8 +3,7 @@
 //**Version**//
 //**  1.05 **//
 //**15-7-15**//
-//**Author **//
-//** Baby  **//
+//**Author **// ** Baby  **//
 //***********//
 
 //======= namespacep START=======//
@@ -190,10 +189,10 @@ Base.change.datetime.dateFormatter = function (date,type) {
     var month = date.replace(/MM/,this.getMonth()>9?this.getMonth().toString():'0' + this.getMonth());
     var day = date.replace(/dd|DD/,this.getDate()>9?this.getDate().toString():'0' + this.getDate());
     if (type === 1) {
-        return = day + '-' + month + '-' + day;
+        return year + "-" + month + "-" + day;
     }else if (type === 2) {
-        return = month + '-' + day;
-    };
+        return month + "-'" + day;
+    }
 };
 
 Base.get.getlength.getStrLength = function(str){
@@ -202,4 +201,3 @@ Base.get.getlength.getStrLength = function(str){
 
 Base.get.getlength.getStrTrueLength = function(str){
     return str.replace(/[^x00-xff]/g,"xx").length;
-};
