@@ -1,8 +1,8 @@
 //***********//
 //**baby.js**//
 //**Version**//
-//**  1.05 **//
-//**15-7-15**//
+//**  1.10 **//
+//**15-8-20**//
 //**Author **// ** Baby  **//
 //***********//
 
@@ -16,10 +16,10 @@ var Base;
 if (!Base) Base = {};
 
 /**
- * [check second namespace]
+ * [Check second namespace]
  * @type {Object}
  */
-Base.check = {};
+Base.Check = {};
 
 /**
  * [get second namespace]
@@ -34,16 +34,16 @@ Base.get = {};
 Base.change = {};
 
 /**
- * [checkstr third namespace]
+ * [Checkstr third namespace]
  * @type {Object}
  */
-Base.check.checkstr = {};
+Base.Check.Checkstr = {};
 
 /**
- * [checkcode third namespace]
+ * [Checkcode third namespace]
  * @type {Object}
  */
-Base.check.checkcode = {};
+Base.Check.Checkcode = {};
 
 /**
  * [getstr third namespace]
@@ -52,16 +52,28 @@ Base.check.checkcode = {};
 Base.get.getstr = {};
 
 /**
- * [getlength third namespace]
+ * [GetLength third namespace]
  * @type {Object}
  */
-Base.get.getlength = {};
+Base.get.GetLength = {};
 
 /**
  * [datetime third namespace]
  * @type {Object}
  */
 Base.change.datetime = {};
+
+/**
+ * [String second namespace]
+ * @type {Object}
+ */
+Base.String = {};
+
+/**
+ * [Refreshing second namespace]
+ * @type {Object}
+ */
+Base.Refreshing = {};
 
 //======= namespace END =======//
 
@@ -72,92 +84,65 @@ Base.change.datetime = {};
  * @param  {string[]} str
  * @return {Boolean}
  */
-Base.check.checkstr.isNullOrEmpty = function (str) {
-    // body...
+Base.Check.Checkstr.isNullOrEmpty = function (str) {
     var result = false;
     if(str.length !== 0){
         for(var i = 0;i<str.length;i++){
-            if(str[i] !== ""){
-                result = true;
-            }			else{
-                result = false;
-            }
+            //js中c#的string.IsNullOrEmpty(str)为!str
+            result = !str[i];
         }
     }
     return result;
 };
 
 /**
- * [checkphonecode 正则表达式验证手机号是否正确]
- * @param  {varchar} phonenum
+ * [Checkphonecode 正则表达式验证手机号是否正确]
+ * @param  {string} phonenum
  * @return {Boolean}
  */
-Base.check.checkcode.checkPhoneCode = function (phonenum){
+Base.Check.Checkcode.checkPhoneCode = function (phonenum){
     //待检测表达式是否正确
     var right = /^((\(\d{3}\))|(\d{3}\-))?13\d{9}|14[57]\d{8}|15\d{9}|18\d{9}|17\d{9}$/;
-    if (phonenum.length != 11 || !phonenum.match(right)) {
-        return false;
-    } 
-    return true;
+    return phonenum.length === 11 && phonenum.match(right);
 };
 
 /**
- * [checkmailcode 正则表达式验证邮箱是否正确]
- * @param  {varchar}email
+ * [Checkmailcode 正则表达式验证邮箱是否正确]
+ * @param  {string}email
  * @return {Boolean}
  */
-Base.check.checkcode.checkMailCode = function (email){
-    var right = /^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/;
-    if (email.test(right)) {
-        return true;
-    }
-    else {
-        return false;
-    }
+Base.Check.Checkcode.checkMailCode = function (email){
+    var right = /^[0-9A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/;
+    return email.match(right) !== null;
 };
 
 /**
- * [checkidcard 正则表达式验证身份证是否正确]
- * @param  {varchar} idcard
+ * [Checkidcard 正则表达式验证身份证是否正确]
+ * @param  {string} idcard
  * @return {Boolean}
  */
-Base.check.checkcode.checkIdcardCode = function (idcard){
+Base.Check.Checkcode.checkIdcardCode = function (idcard){
     var right = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-    if (idcard.test(right)) {
-        return true;
-    }
-    else {
-        return false;
-    }
+     return idcard.match(right) !== null;
 };
 
 /**
- * [checktelcode 正则表达式验证固定电话是否正确]
- * @param  {varchar} telephone
+ * [Checktelcode 正则表达式验证固定电话是否正确]
+ * @param  {string} telephone
  * @return {Boolean}
  */
-Base.check.checkcode.checkTelCode = function  (telephone) {
+Base.Check.Checkcode.checkTelCode = function  (telephone) {
     var right = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-    if (telephone.test(right)) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return telephone.match(right) !== null;
 };
 
 /**
- * [checktelcode 验证两个字符串是否相等]
- * @param  {varchar} str1 str2
+ * [Checktelcode 验证两个字符串是否相等]
+ * @param  {string} str1 str2
  * @return {Boolean}
  */
-Base.check.checkstr.comparison = function (str1,str2){
-    if(str1 ==  str2){
-        return true;
-    }
-    else{
-        return false;
-    }
+Base.Check.Checkstr.comparison = function (str1,str2){
+    return str1 == str2;
 };
 
 /**验证url**/
@@ -170,7 +155,7 @@ Base.get.getstr.getUrlParam = function () {
     var theRequest = new Object();
     if (url.indexOf("?") !== -1) {
         var str = url.substr(1);
-        strs = str.split("&");
+        var strs = str.split("&");
         for (var i = 0; i < strs.length; i++) {
             theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
         }
@@ -178,26 +163,43 @@ Base.get.getstr.getUrlParam = function () {
     return theRequest;
 };
 
-/**
+/**%
  * [dateFormatter Description]
  * @param  {datetime} date [description]
  * @param  {int} type [1 "yyyy-MM-dd" 2 "MM-dd"]
  * @return {string}
  */
-Base.change.datetime.dateFormatter = function (date,type) {
-    var year = date.replace(/yyyy/,this.getFullYear());
-    var month = date.replace(/MM/,this.getMonth()>9?this.getMonth().toString():'0' + this.getMonth());
-    var day = date.replace(/dd|DD/,this.getDate()>9?this.getDate().toString():'0' + this.getDate());
-    if (type === 1) {
-        return year + "-" + month + "-" + day;
-    }else if (type === 2) {
-        return month + "-'" + day;
-    }
-};
+//Base.change.datetime.dateFormatter = function (date,type) {
+//    var year = date.replace(/yyyy/,this.getFullYear());
+//    var month = date.replace(/MM/,this.getMonth()>9?this.getMonth().toString():'0' + this.getMonth());
+//    var day = date.replace(/dd|DD/,this.getDate()>9?this.getDate().toString():'0' + this.getDate());
+//    if (type === 1) {
+//        return year + "-" + month + "-" + day;
+//    }else if (type === 2) {
+//        return month + "-'" + day;
+//    }
+//    return "Error";
+//};
 
-Base.get.getlength.getStrLength = function(str){
+/**
+ * [getStrLength have blank space]
+ * @param str
+ * @returns {Number}
+ */
+Base.String.GetLength.getStrLength = function(str){
     return str.length;  
 };
 
-Base.get.getlength.getStrTrueLength = function(str){
+/**
+ * [getStrTrueLength haven't blank space]
+ * @param str
+ * @returns {Number}
+ */
+Base.String.GetLength.getStrTrueLength = function(str){
     return str.replace(/[^x00-xff]/g,"xx").length;
+};
+
+
+/*Base.Refreshing.pullDownRefresh = function(){
+
+};*/

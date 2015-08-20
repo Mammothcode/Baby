@@ -12,3 +12,7 @@ jQuery变量要求首字符为’_’, 其他与原生JavaScript 规则相同, �
 9. 代码结构明了, 加适量注释. 提高函数重用率;
 10. 注重与html分离, 减小reflow, 注重性能.
 解释一下：js主要包括extends(引入第三方的js)、module（项目模块自己的js）、lib（引用包，这里也可以继续拆分），module中包含具体的模块中的js。common.js是核心命名空间的js.
+
+常用id命名
+手机号码phoneNum
+确认密码cfmPassword
