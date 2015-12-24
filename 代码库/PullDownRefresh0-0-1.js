@@ -1,65 +1,25 @@
-//======================//
-//=======PullDown=======//
-//=======  baby  =======//
-//=======  0.0.1 =======//
-//======================//
-
-//实时监测窗口滚动
-//分页量
-var pagesize = 4;
-//是否正在请求
-var isLoading = false;
-//页数
-var pageindex = 0;
-//票务类型
-var ttId = 0;
-
-//主函数
-$(function() {
-    
-});
-
-//滚动
-$(window).scroll(function () {
-    calculatepage();
-});
-
-//验证滚动是否能触发
-function calculatepage() {
-    if (isLoading === false) {
-        var $_lastitem = $(".item:last-child");
-        if (lastitem.length !== 0) {
-            pageindex = Math.ceil(($(".item").length) / pagesize);
-            var lastItemHight = $($_lastitem).offset().top + $($_lastitem).height() - $(window).scrollTop();
-            if (lastItemHight < $(window).height()) {
-                pulldownrefresh(pageindex);
+Baby.App.Page.pageRefresh = function(options){
+    var settings = $.extend({
+        pageSize:10,//一页显示的条数
+        pageIndex:1,//当前请求哪一页
+        isAjax:true,//是否正在ajax中
+        $listLast:null,//当前列表最后一个对象
+        listCount:0,//列表现有个数
+        other:null,//其他参数
+        callback:null//回调函数
+    },options);
+    //没有在ajax才能继续请求
+    if (settings.isAjax === false) {
+        if (settings.listCount !== 0) {
+            settings.pageIndex = Math.ceil(settings.listCount / settings.pageSize);
+            var lastItemHeight = $(settings.$listLast.offset().top + $(settings.$listLast.height()
+                    - $(window).scrollTop();
+            //满足条件后才能执行回调函数
+            if (lastItemHeight < $(window).height()) {
+                //回调函数为空->关闭||回调函数不为空判断是否为函数->true->执行函数->函数返回值为false不关闭弹出层,否则关闭弹出层
+                if (settings.callback == null || typeof (settings.callback) === "function" && settings.callback() !== false) {
+                }
             }
         }
     }
-}
-
-//下拉刷新(页数)
-function pulldownrefresh(pageindex) {
-    isLoading = true;
-    var url = "";
-    var data = { "pagesize": pagesize, "pageindex": pageindex };
-    $.ajax({
-        type: "post",
-        url: url,
-        data: data,
-        async: true,
-        success: function (json) {
-            var response = eval('(' + json + ')');
-            if (response.state !== "NODATA") {
-                
-                }
-                $("#item_list").append(html);
-            }
-            if (response.datacount < pagesize) {
-                isLoading = true;
-            } else {
-                isLoading = false;
-            }
-        }
-    });
-}
+};

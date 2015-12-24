@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<head>  
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>标题</title>
+	<script src="Baby-coffee.js"></script>
+	<script type="text/javascript" src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+</head> 
+<body>  
+	<input type="text" id="text" />
+	<input type="button" id="button" value="测试"/>
+</body>
+</html>
+<script type="text/javascript">
+	//按钮的点击事件
+	$("#button").on("click",function(){
+		var text = $("#text").val();
+		var checkAll = ["a",""];
+		if(Baby.Util.String.notNullOrEmpty(checkAll)){
+			console.log("pass");
+		}else{
+			console.log("Error");
+		}
+	});
+</script>
